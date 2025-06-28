@@ -1,6 +1,6 @@
 from models.user_model import UserCreate, UserLogin, UserWithId
 from fastapi import HTTPException
-from utils import db
+from utils.db import db
 import bcrypt
 from bson import ObjectId
 from bson.errors import InvalidId

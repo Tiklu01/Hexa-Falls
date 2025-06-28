@@ -1,8 +1,15 @@
-from motor.motor_asyncio import AsyncIOMotorClient
+# db.py
 import os
+from motor.motor_asyncio import AsyncIOMotorClient
+from dotenv import load_dotenv
 
-MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017")
+load_dotenv()  # load .env
+
+MONGO_URI = os.getenv("MONGODB_URI")
+DB_NAME = os.getenv("DB_NAME", "hexacare")
+
+if not MONGO_URI:
+    raise ValueError("MONGODB_URI not found in environment variables")
+
 client = AsyncIOMotorClient(MONGO_URI)
-
-db = client["file_uploads_db"]
-collection = db["uploaded_files"]
+db = client[DB_NAME]  # ✅ this is what you should import
